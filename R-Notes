@@ -1,0 +1,44 @@
+L3 - 7/17/2015
+Reference
+#names(variable)
+#gives list of variables
+Qplot(x=dob_day,data=pf) +
+scale_x_discrete(breaks = 1:31) +
+facet_wrap(~dob_month,ncol = 3) #creates histogram
+#facet splits data and plots subset of data together
+#facet_wrap(~variable)
+data = subset(pf,!is.na(gender))
+#ignore NA. NA is usually empty data
+by(pf$friend_count,pf$gender,summary)
+#pf$friend_count = variable
+#pf$gender = categorical variable
+#summary, can be replaced by median, mean, sum, max, etc.
+
+#More qplot commands
+xlab = 'string'
+ylab = 'string'
+color = I('black')
+fill = I('#099DD9') #F79420
+binwidth = 30
+scale_x_log10()
+
+ggplot(aes(x=friend_count),data=pf) +
+geom_histogram() +
+scale_x_log10()
+
+qplot(x=log10(friend_count),data=pf) #qplot auto makes histogram for 1 variable
+
+qplot(x=friend_count,data=subset(pf,!is.na(gender)),
+y = ..count../sum(..count..), binwidth = 10,
+geom = 'freqpoly', color = gender) +
+scale_x_continuous(lim = c(0,1000),breaks = seq(0,1000,50))
+
+use gridExtra to put multi plots #library(gridExtra)
+p1 = qplot(...)
+p2 = qplot(...)
+p3 = qplot(...)
+grid.arrange(p1,p2,p3)
+
+coord_cartesian(ylim=c(0,1000)) #changes coordinates without affecting data
+
+Final: What kind of data do you need to answer the specific question.
