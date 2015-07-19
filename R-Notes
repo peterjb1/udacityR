@@ -1,44 +1,28 @@
-L3 - 7/17/2015
-Reference
-#names(variable)
-#gives list of variables
-Qplot(x=dob_day,data=pf) +
-scale_x_discrete(breaks = 1:31) +
-facet_wrap(~dob_month,ncol = 3) #creates histogram
-#facet splits data and plots subset of data together
-#facet_wrap(~variable)
-data = subset(pf,!is.na(gender))
-#ignore NA. NA is usually empty data
-by(pf$friend_count,pf$gender,summary)
-#pf$friend_count = variable
-#pf$gender = categorical variable
-#summary, can be replaced by median, mean, sum, max, etc.
+Lesson 3 - 7/17/2015
+========================================================
+library(ggthemes)
+theme_set(theme_minimal(24))
+library(gridExtra)
 
-#More qplot commands
-xlab = 'string'
-ylab = 'string'
-color = I('black')
-fill = I('#099DD9') #F79420
-binwidth = 30
-scale_x_log10()
-
-ggplot(aes(x=friend_count),data=pf) +
-geom_histogram() +
-scale_x_log10()
-
-qplot(x=log10(friend_count),data=pf) #qplot auto makes histogram for 1 variable
-
-qplot(x=friend_count,data=subset(pf,!is.na(gender)),
-y = ..count../sum(..count..), binwidth = 10,
-geom = 'freqpoly', color = gender) +
-scale_x_continuous(lim = c(0,1000),breaks = seq(0,1000,50))
-
-use gridExtra to put multi plots #library(gridExtra)
-p1 = qplot(...)
-p2 = qplot(...)
-p3 = qplot(...)
-grid.arrange(p1,p2,p3)
-
-coord_cartesian(ylim=c(0,1000)) #changes coordinates without affecting data
+Learned to create histograms of 1 variable, facet with a second variable to split the data to compare them,
+created box plots, and learned how to think about outliers.
+Is the outlier an extreme case from bad data or is it good data?
+For example:
+A significant amount of people have a birthday on January 1 in Facebook,
+while every other day on every month show low variance. Is this a coincidence or
+  is there another explanation? The default birthday is January 1, so that might explain why.
+Then, how do you deal with the outlier in your analysis?
 
 Final: What kind of data do you need to answer the specific question.
+
+Lesson 4 - 7/18/2015
+========================================================
+Learned bivariate plotting using ggplot and adding layers
+to improve understandability of the data.
+Also learned about dplyr and alr3.
+Example: Used data(Mitchell) to test for correlation.
+cor tests for linearity, but Mitchell was cyclical, so need to keep
+these things in mind. Try to find the correct pattern.
+library(dplyr)
+
+Final: Nature of the data should suggest the graphic, and so features such as scale matter.
