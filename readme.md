@@ -6,5 +6,5 @@ Data Analysis with R
 7/19/2015: PS4 - finished
 7/19/2015: L5 - finished
 7/20/2015: PS5 - finished
-L6
+7/23/2015: L6 - finished
 Project
